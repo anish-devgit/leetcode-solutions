@@ -7,7 +7,7 @@ LeetCode Solutions
 🚀 Features
 - Clean and easy-to-understand code  
 - Multiple approaches where applicable 
-- Consistent daily practice
+- Consistent daily practice 
 - Well-structured folder system
 
 🧠 Goals
