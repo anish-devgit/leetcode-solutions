@@ -1,0 +1,12 @@
+class Solution {
+    public boolean isOneBitCharacter(int[] bits) {
+        int currentIndex = 0;
+        int arrayLength = bits.length;
+      
+        while (currentIndex < arrayLength - 1) {
+            currentIndex += bits[currentIndex] + 1;
+        }
+      
+        return currentIndex == arrayLength - 1;
+    }
+}
