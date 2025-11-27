@@ -1,0 +1,19 @@
+class Solution {
+    public long maxSubarraySum(int[] nums, int k) {
+        long[] minPrefixSum = new long[k];
+        final long INFINITY = 1L << 62;
+        Arrays.fill(minPrefixSum, INFINITY);
+        minPrefixSum[k - 1] = 0;
+
+        long prefixSum = 0;
+        long maxSum = -INFINITY;
+
+        for (int i = 0; i < nums.length; ++i) {
+            prefixSum += nums[i];
+            maxSum = Math.max(maxSum, prefixSum - minPrefixSum[i % k]);
+            minPrefixSum[i % k] = Math.min(minPrefixSum[i % k], prefixSum);
+        }
+
+        return maxSum;
+    }
+}
