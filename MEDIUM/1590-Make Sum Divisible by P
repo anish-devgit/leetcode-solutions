@@ -1,0 +1,33 @@
+class Solution {
+    public int minSubarray(int[] nums, int p) {
+        int totalRemainder = 0;
+        for (int num : nums) {
+            totalRemainder = (totalRemainder + num) % p;
+        }
+      
+        if (totalRemainder == 0) {
+            return 0;
+        }
+      
+        Map<Integer, Integer> lastSeenIndex = new HashMap<>();
+        lastSeenIndex.put(0, -1);
+      
+        int n = nums.length;
+        int minLength = n;
+        int currentPrefixRemainder = 0;
+      
+        for (int i = 0; i < n; i++) {
+            currentPrefixRemainder = (currentPrefixRemainder + nums[i]) % p;
+            int targetRemainder = (currentPrefixRemainder - totalRemainder + p) % p;
+          
+            if (lastSeenIndex.containsKey(targetRemainder)) {
+                int subarrayLength = i - lastSeenIndex.get(targetRemainder);
+                minLength = Math.min(minLength, subarrayLength);
+            }
+          
+            lastSeenIndex.put(currentPrefixRemainder, i);
+        }
+      
+        return minLength == n ? -1 : minLength;
+    }
+}

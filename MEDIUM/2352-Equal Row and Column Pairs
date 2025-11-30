@@ -1,0 +1,25 @@
+class Solution {
+    public int equalPairs(int[][] grid) {
+        int gridSize = grid.length;
+        int equalPairCount = 0;
+
+        for (int rowIndex = 0; rowIndex < gridSize; ++rowIndex) {
+            for (int colIndex = 0; colIndex < gridSize; ++colIndex) {
+                boolean isEqual = true;
+
+                for (int position = 0; position < gridSize; ++position) {
+                    if (grid[rowIndex][position] != grid[position][colIndex]) {
+                        isEqual = false;
+                        break;
+                    }
+                }
+
+                if (isEqual) {
+                    equalPairCount++;
+                }
+            }
+        }
+
+        return equalPairCount;
+    }
+}
