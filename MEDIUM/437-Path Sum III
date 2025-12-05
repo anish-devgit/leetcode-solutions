@@ -1,15 +1,26 @@
 class Solution {
-  public int pathSum(TreeNode root, int sum) {
-    if (root == null)
-      return 0;
-    return dfs(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
-  }
-
-  private int dfs(TreeNode root, int sum) {
-    if (root == null)
-      return 0;
-    return (sum == root.val ? 1 : 0) +   //
-        dfs(root.left, sum - root.val) + //
-        dfs(root.right, sum - root.val);
-  }
+    private Map<Long, Integer> prefixSumCount = new HashMap<>();
+    private int targetSum;
+  
+    public int pathSum(TreeNode root, int targetSum) {
+        prefixSumCount.put(0L, 1);
+        this.targetSum = targetSum;
+        return dfs(root, 0);
+    }
+  
+    private int dfs(TreeNode node, long currentPrefixSum) {
+        if (node == null) {
+            return 0;
+        }
+      
+        currentPrefixSum += node.val;
+        int pathCount = prefixSumCount.getOrDefault(currentPrefixSum - targetSum, 0);
+        prefixSumCount.merge(currentPrefixSum, 1, Integer::sum);
+      
+        pathCount += dfs(node.left, currentPrefixSum);
+        pathCount += dfs(node.right, currentPrefixSum);
+      
+        prefixSumCount.merge(currentPrefixSum, -1, Integer::sum);
+        return pathCount;
+    }
 }
