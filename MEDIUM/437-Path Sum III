@@ -23,4 +23,4 @@ class Solution {
         prefixSumCount.merge(currentPrefixSum, -1, Integer::sum);
         return pathCount;
     }
-}
+}   
