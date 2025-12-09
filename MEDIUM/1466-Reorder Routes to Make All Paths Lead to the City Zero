@@ -1,0 +1,33 @@
+class Solution {
+    private List<int[]>[] adjacencyList;
+
+    public int minReorder(int n, int[][] connections) {
+        adjacencyList = new List[n];
+        Arrays.setAll(adjacencyList, index -> new ArrayList<>());
+      
+        for (int[] connection : connections) {
+            int fromNode = connection[0];
+            int toNode = connection[1];
+          
+            adjacencyList[fromNode].add(new int[] {toNode, 1});
+            adjacencyList[toNode].add(new int[] {fromNode, 0});
+        }
+      
+        return dfs(0, -1);
+    }
+
+    private int dfs(int currentNode, int parentNode) {
+        int reversalCount = 0;
+      
+        for (int[] edge : adjacencyList[currentNode]) {
+            int neighborNode = edge[0];
+            int needsReversal = edge[1];
+          
+            if (neighborNode != parentNode) {
+                reversalCount += needsReversal + dfs(neighborNode, currentNode);
+            }
+        }
+      
+        return reversalCount;
+    }
+}
