@@ -1,0 +1,41 @@
+class Solution {
+    public long maxScore(int[] nums1, int[] nums2, int k) {
+        int n = nums1.length;
+      
+        // Create pairs of (nums1[i], nums2[i]) for easier manipulation
+        int[][] pairs = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            pairs[i] = new int[] {nums1[i], nums2[i]};
+        }
+      
+        // Sort pairs by nums2 values in descending order
+        // This ensures we process larger nums2 values first
+        Arrays.sort(pairs, (a, b) -> b[1] - a[1]);
+      
+        long maxResult = 0;
+        long currentSum = 0;
+      
+        // Min heap to maintain k largest nums1 values
+        // Automatically removes the smallest when size exceeds k
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+      
+        // Iterate through sorted pairs
+        for (int i = 0; i < n; i++) {
+            // Add current nums1 value to sum and heap
+            currentSum += pairs[i][0];
+            minHeap.offer(pairs[i][0]);
+          
+            // When we have exactly k elements, calculate score
+            if (minHeap.size() == k) {
+                // Score = sum of k nums1 values * minimum nums2 value
+                // Since pairs are sorted by nums2 descending, pairs[i][1] is the minimum
+                maxResult = Math.max(maxResult, currentSum * pairs[i][1]);
+              
+                // Remove smallest nums1 value to make room for next iteration
+                currentSum -= minHeap.poll();
+            }
+        }
+      
+        return maxResult;
+    }
+}

@@ -1,0 +1,17 @@
+class SmallestInfiniteSet {
+    private TreeSet<Integer> availableNumbers = new TreeSet<>();
+
+    public SmallestInfiniteSet() {
+        for (int i = 1; i <= 1000; i++) {
+            availableNumbers.add(i);
+        }
+    }
+
+    public int popSmallest() {
+        return availableNumbers.pollFirst();
+    }
+
+    public void addBack(int num) {
+        availableNumbers.add(num);
+    }
+}
