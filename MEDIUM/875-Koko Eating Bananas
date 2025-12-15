@@ -1,0 +1,23 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int left = 1;
+        int right = (int) 1e9;
+
+        while (left < right) {
+            int mid = (left + right) >> 1;
+
+            int totalHours = 0;
+            for (int pile : piles) {
+                totalHours += (pile + mid - 1) / mid;
+            }
+
+            if (totalHours <= h) {
+                right = mid;
+            } else {
+                left = mid + 1;
+            }
+        }
+
+        return left;
+    }
+}
