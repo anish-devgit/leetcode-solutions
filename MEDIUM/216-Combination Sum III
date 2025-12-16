@@ -1,0 +1,30 @@
+class Solution {
+    private List<List<Integer>> result = new ArrayList<>();
+    private List<Integer> currentCombination = new ArrayList<>();
+    private int targetSize;
+
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        this.targetSize = k;
+        dfs(1, n);
+        return result;
+    }
+
+    private void dfs(int currentNumber, int remainingSum) {
+        if (remainingSum == 0) {
+            if (currentCombination.size() == targetSize) {
+                result.add(new ArrayList<>(currentCombination));
+            }
+            return;
+        }
+
+        if (currentNumber > 9 || currentNumber > remainingSum || currentCombination.size() >= targetSize) {
+            return;
+        }
+
+        currentCombination.add(currentNumber);
+        dfs(currentNumber + 1, remainingSum - currentNumber);
+        currentCombination.remove(currentCombination.size() - 1);
+
+        dfs(currentNumber + 1, remainingSum);
+    }
+}
