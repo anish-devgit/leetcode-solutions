@@ -1,0 +1,24 @@
+class Solution {
+    private Integer[] memo;
+    private int[] cost;
+
+    public int minCostClimbingStairs(int[] cost) {
+        this.cost = cost;
+        this.memo = new Integer[cost.length];
+        return Math.min(dfs(0), dfs(1));
+    }
+
+    private int dfs(int currentIndex) {
+        if (currentIndex >= cost.length) {
+            return 0;
+        }
+
+        if (memo[currentIndex] == null) {
+            int oneStep = dfs(currentIndex + 1);
+            int twoSteps = dfs(currentIndex + 2);
+            memo[currentIndex] = cost[currentIndex] + Math.min(oneStep, twoSteps);
+        }
+
+        return memo[currentIndex];
+    }
+}
