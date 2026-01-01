@@ -10,7 +10,7 @@ LeetCode Solutions
 - Consistent daily practice 
 - Well-structured folder system 
 
-🧠 Goals
+🧠 Goals 
 - Strengthen DSA fundamentals
 - Build consistency by solving daily problems
 - Prepare for coding interviews 
