@@ -108,3 +108,5 @@ More improvements coming soon… 🚀
 <!-- Updated structural notes section 156 -->
 
 <!-- Updated structural notes section 161 -->
+
+<!-- Updated structural notes section 704 -->
